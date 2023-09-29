@@ -1,74 +1,102 @@
-import React from 'react';
-import { useRouter } from "next/router";
+import { FC } from 'react';
+import Image from 'next/image';
+import { useRouter } from 'next/router'; 
 
 interface NavbarProps {
-  currentPage: string;
-  setCurrentPage: (pageName: string) => void;
+  currentComponent: string;
+  setCurrentComponent: (component: string) => void;
+  isMenuOpen: any
+  setIsMenuOpen: any
 }
 
-const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage }) => {
-  const changePage = (pageName: string) => {
-    setCurrentPage(pageName);
-  };
-  const router = useRouter();
+const Navbar: FC<NavbarProps> = ({ currentComponent, setCurrentComponent, isMenuOpen,
+    setIsMenuOpen }) => {
+  const router = useRouter();  
 
-  const handleHomeClick = () => {
-    changePage('Inicio')
-    router.push("/");
+
+  const redirectHome = () => {
+    setCurrentComponent('Inicio')
+    setIsMenuOpen(false)
+    router.push('/');
+  };
+ 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+    console.log(isMenuOpen)
+  }
+ 
+
+  const handleSearchClick = () => {
+    setCurrentComponent('Search')
+    setIsMenuOpen(false)
+  };
+  const handleNotificationsClick = () => {
+    setCurrentComponent('Notifications')
+    setIsMenuOpen(false)
   };
 
-  const handleQuienesClick = () => {
-    changePage('Servicios')
-    router.push("/");
-  };
-  const handleServiciosClick = () => {
-    changePage('Contacto')
-    router.push("/");
-  };
-
-  const handleIniciarSesionClick = () => {
-    changePage('Solicitarpresupuesto')
-    router.push("/login");
-  };
-
-  const gotocontacts = () =>{
-    setCurrentPage("Contacto")
-       router.push("/contactanos");
-    };
-
-   return (
-    <nav className="fixed top-0 left-0 w-full bg-black py-3 flex flex-row  justify-center z-50 align-center font-sans">
-      <h2 className="font-medium text-2xl mx-5 mb-1 text-yellow-500">Giru.es</h2>
-      <button
-        className={`mx-5 text-sm ${currentPage === 'Home' ? 'text-white' : 'text-yellow-500'}`}
-        onClick={handleHomeClick}
-      >
-        Home
-      </button>
-      <button
-        className={`mx-5 text-sm ${currentPage === 'QuienesSomos' ? 'text-white' : 'text-yellow-500'}`}
-        onClick={handleQuienesClick}
-      >
-        Nosotros
-      </button>
-      <button
-        className={`mx-5 text-sm ${currentPage === 'Servicios' ? 'text-white' : 'text-yellow-500'}`}
-        onClick={handleServiciosClick}
-      >
-        Servicios
-      </button>
-      <button
-        className={`mx-5 text-sm ${currentPage === 'Contacto' ? 'text-white' : 'text-yellow-500'}`}
-        onClick={gotocontacts}
-        >
-        Contáctanos
-      </button>
-      <button className="bg-yellow-500 text-black rounded-lg shadow-lg px-2 py-1 font-bold mx-5 text-sm"
-      onClick={handleIniciarSesionClick}
-    >
-      INICIAR SESIÓN
-    </button>
-    </nav>
+  return (
+    <div className="bg-white shadow-lg px-5 flex justify-between  px-6 py-1">
+      <div className="flex items-center max-h-20 overflow-hidden" onClick={redirectHome}>  
+        <Image src="/logos/3.png" alt="Logo3" width={150} height={10} className='object-cover '/>
+      </div>
+      <div className="flex items-center text-black">
+        <div className="mr-4"  onClick={handleSearchClick}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 text-black cursor-pointer"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+            />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M21 21l-4.35-4.35M8 10H6l-2 6h12l-2-6h-2"
+            />
+          </svg>
+        </div>
+        <div className="mr-4"  onClick={handleNotificationsClick}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 text-black cursor-pointer"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+            />
+          </svg>
+        </div>
+        <div    onClick={toggleMenu}>
+           <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 text-black cursor-pointer"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16m-7 6h7"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
   );
 };
 
