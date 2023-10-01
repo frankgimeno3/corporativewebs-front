@@ -1,6 +1,5 @@
-import Navbar from "../components/home/Navbar";
-import Footer from "../components/home/Footer";
-import Floating from "../components/home/Floating";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 
