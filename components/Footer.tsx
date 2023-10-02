@@ -39,7 +39,7 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
             <address className="flex flex-col text-sm mt-5">
               <p>Dirección: Bruc 48, Barcelona</p>
               <p>Teléfono: (+34) *** *** ***</p>
-              <p>Email: info@giru.es</p>
+              <p>Email: corporativewebs2023@gmail.com</p>
             </address>
           </div>
         </div>
